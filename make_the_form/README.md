@@ -1,24 +1,28 @@
-# Create the forms
+# Make The Form(s)
 
 1. A Recipe has_many ingredients. Using the controller's existing create action:
 
 ```ruby
-# POST /recipes
-# POST /recipes.json
 def create
-  @recipe = Recipe.new(params[:recipe])
-  @recipe.ingredients.build(params[:ingredients])
+  @recipe = Recipe.new()
+  @recipe.name = params[:recipe][:name]
 
-  respond_to do |format|
-    if @recipe.save
-      format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
-      format.json { render json: @recipe, status: :created, location: @recipe }
-    else
-      format.html { render action: "new" }
-      format.json { render json: @recipe.errors, status: :unprocessable_entity }
-    end
+  @recipe.description = params[:description]
+
+  params[:ingredients].each do |ingredient|
+    ingredient = Ingredient.new
+    ingredient[:name] = ingredient.name
+    ingredient[:amount] = ingredient.amount
+
+    @recipe.ingredients << ingredient
   end
+
+  if @recipe.save
+    redirect_to @recipe, notice: 'Recipe was successfully created.'
+  else
+    render action: "new"
   end
+end
 ```
 
 Create the recipes form in the recipes/_form partial, so that it will allow you to create a recipe and add multiple ingredients.
@@ -27,18 +31,21 @@ Create the recipes form in the recipes/_form partial, so that it will allow you 
 
 ```ruby
 def create
-  @ingredient = Ingredient.new(params[:ingredient])
+  @ingredient = Ingredient.new
+  @ingredient.name = params[:ingredient][:name]
+
   @ingredient.recipe = Recipe.find(params[:recipe_id])
 
-  respond_to do |format|
-    if @ingredient.save
-      format.html { redirect_to @ingredient, notice: 'Ingredient was successfully created.' }
-      format.json { render json: @ingredienet, status: :created, location: @ingredient }
-    else
-      format.html { render action: "new" }
-      format.json { render json: @ingredient.errors, status: :unprocessable_entity }
-    end
+  if @ingredient.save
+    redirect_to @ingredient, notice: 'Ingredient was successfully created.'
+  else
+    render action: "new"
   end
+end
+
+def show
+  @ingredient = Ingredient.find(params[:id])
+end
 ```
 
 Create the ingredients form in the ingredients/_form partial so that it will allow you to create an ingredient and associate its recipe.
