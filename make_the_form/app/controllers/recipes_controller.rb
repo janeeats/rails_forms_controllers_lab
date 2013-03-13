@@ -14,9 +14,9 @@ class RecipesController < ApplicationController
     @recipe.description = params[:description]
 
     params[:ingredients].each do |ingredient|
-      ingredient = Ingredient.new
-      ingredient[:name] = ingredient.name
-      ingredient[:amount] = ingredient.amount
+      new_ingredient = Ingredient.new
+      new_ingredient.name = ingredient.name
+      new_ingredient.amount = ingredient.amount
 
       @recipe.ingredients << ingredient
     end
