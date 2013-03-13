@@ -4,6 +4,21 @@
     <%= f.text_field :name %>
   </div>
 
+<!-- list all artists -->
+<!--   <select name="song[artist]">
+    <%# Artist.all.each do |a| %>
+    <option name="<%#= a.id %>"> <%#= a.name %> </option>
+    <%# end %>
+  </select>
+ -->
+
+ <%= select_tag :artist %>
+  <% Artist.all.each do |a| %>
+  <%= options_for_select( a.name, a.id) %>
+  <% end %>
+
+ <%#= f.select :artist
+
   <div class="actions">
     <%= f.submit %>
   </div>
