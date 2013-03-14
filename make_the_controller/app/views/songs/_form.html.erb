@@ -12,12 +12,10 @@
   </select>
  -->
 
- <%= select_tag :artist %>
-  <% Artist.all.each do |a| %>
-  <%= options_for_select( a.name, a.id) %>
-  <% end %>
+  <% artists_array = Artist.all.collect { |a| [a.name] } %>
+  <%= select_tag "song[artist]", options_for_select(artists_array) %>
 
- <%#= f.select :artist
+ <%#= f.select :artist %>
 
   <div class="actions">
     <%= f.submit %>

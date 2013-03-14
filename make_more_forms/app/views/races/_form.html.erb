@@ -1,0 +1,21 @@
+<%= form_for @race do |f| %>
+
+  <%= f.label :name %><br />
+  <%= f.text_field :name %><br />
+
+  <%= f.label :description %><br />
+  <%= f.text_field :description %><br />
+
+  <%= f.label :horse_attributes %><br />  
+  <input name="horse_attributes[][name]" size="30" type="text" />  
+  <input name="horse_attributes[][number]" size="15" type="text" />
+  <input name="horse_attributes[][position]" size="15" type="text" /><br />
+
+  <%= f.label :jockey_attributes %><br />  
+  <input name="jockey_attributes[][name]" size="30" type="text" />  
+  <input name="jockey_attributes[][height]" size="15" type="text" />
+  <input name="jockey_attributes[][shoe_size]" size="15" type="text" /><br />
+
+  <%= f.submit %>
+
+<% end %>

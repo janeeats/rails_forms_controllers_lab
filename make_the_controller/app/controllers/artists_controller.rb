@@ -18,7 +18,9 @@ class ArtistsController < ApplicationController
   end
 
   def create
-    # TODO: fill me in!
+    @artist = Artist.new(params[:artist])
+    @artist.birth_year = params[:artist_year_of_birth]
+    @artist.songs = params[:song][:name]
 
     if @artist.save
       redirect_to @artist, notice: 'Artist was successfully created.'

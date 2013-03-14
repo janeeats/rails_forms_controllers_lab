@@ -1,0 +1,27 @@
+<%= form_for @post do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :title %>
+  <%= f.text_area :body %>
+  
+<% end %>
+
+
+post => {
+  :title => "",
+  :body => "",
+  :comment_attributes => {
+    0 => {
+      :body => ""
+      :email => ""
+    },
+    1 => {
+      :body => ""
+      :email => ""
+    }, 
+    2 => {
+      :body => ""
+      :email => ""
+    }, 
+  }
+}
