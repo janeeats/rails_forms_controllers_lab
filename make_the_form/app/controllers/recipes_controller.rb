@@ -15,11 +15,20 @@ class RecipesController < ApplicationController
 
     params[:ingredients].each do |ingredient|
       new_ingredient = Ingredient.new
-      new_ingredient.name = ingredient.name
-      new_ingredient.amount = ingredient.amount
+      new_ingredient.name = ingredient[:name]
+      new_ingredient.amount = ingredient[:amount]
 
-      @recipe.ingredients << ingredient
+      @recipe.ingredients << new_ingredient
     end
+
+    # BOB'S CODE
+    # params[:ingredients].each do |ingredient|
+    #   new_ingredient = Ingredient.new
+    #   new_ingredient.name = ingredient.name
+    #   new_ingredient.amount = ingredient.amount
+
+    #   @recipe.ingredients << ingredient
+    # end
 
     if @recipe.save
       redirect_to @recipe, notice: 'Recipe was successfully created.'

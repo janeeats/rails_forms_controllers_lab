@@ -1,0 +1,12 @@
+<%= form_for @ingredient do |f| %>
+
+  <%= f.label :name %><br />
+  <%= f.text_field :name %><br />
+
+  <%= f.label :recipe %><br />
+  <% recipes_array = Recipe.all.collect { |r| [r.name, r.id] } %>
+    <%= select_tag "recipe_id", options_for_select(recipes_array) %>
+  
+  <%= f.submit %>
+
+<% end %>
