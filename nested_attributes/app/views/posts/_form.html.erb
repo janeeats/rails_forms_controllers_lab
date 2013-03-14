@@ -1,13 +1,67 @@
+<script>
+$(document).ready(function(){
+
+
+  var i = 0;
+  $("#comment_add").click(function(){
+    i++;
+    event.preventDefault();
+    $(".comment_form:last").clone().appendTo("#comment_new");
+
+    $(".comment_form:last textarea").attr("name", "post[comments_attributes][" + i + "][body]");
+
+    console.log(i);
+  });
+
+  $("#comment_remove").click(function(){
+    event.preventDefault();
+    $(".comment_form:last").remove();
+  });
+
+
+});
+</script>
+
 <%= form_for @post do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <%= f.label :title %>
-  <%= f.text_area :body %>
-  
+  <%= f.label :title %><br />
+  <%= f.text_field :title %><br />
+
+  <%= f.label :body %><br />
+  <%= f.text_area :body %><br />
+  <p class="comment_form">
+    <%= f.fields_for :comments do |c_a| %>
+      Comment:<br /> <%= c_a.text_area :body %><br />
+      Email:<br /> <%= c_a.text_field :email %><br />
+    <% end %>
+  </p>
+
+  <p id="comment_new"></p>
+  <button id="comment_add" type="button">
+    Add Another Comment!
+  </button>
+  <br />
+  <button id="comment_remove" type="button">
+    Remove A Comment!
+  </button>
+  <br />
+<!--   <button id="comment_reset" type="button">
+    Remove A Comment!
+  </button>
+  <br /> -->
+
+  <%= f.submit %>  
 <% end %>
 
+<!--   <label for="comment_body">Comment Body</label>
+  <textarea name="post[comments_attributes][][body]">
+  </textarea><br />
+  <label for="comment_body">Your E-mail</label>
+  <input name="post[comments_attributes][][email]">
+  </input><br />
+ -->
 
-post => {
+
+<!-- post => {
   :title => "",
   :body => "",
   :comment_attributes => {
@@ -24,4 +78,4 @@ post => {
       :email => ""
     }, 
   }
-}
+} -->

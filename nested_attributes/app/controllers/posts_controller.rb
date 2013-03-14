@@ -5,6 +5,11 @@ class PostsController < ApplicationController
   end
 
   def create
+    raise params.inspect
+    @post = Post.new(params[:post])
+    @post.save
+
+    redirect_to post_path(@post)
   end
 
   def show
